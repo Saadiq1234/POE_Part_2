@@ -21,7 +21,7 @@ namespace POE_Part_2
         }
 
         // Define a class to hold ingredient details
-        internal class Ingredient
+        public class Ingredient
         {
             public string Name { get; set; }
             public double Quantity { get; set; }
