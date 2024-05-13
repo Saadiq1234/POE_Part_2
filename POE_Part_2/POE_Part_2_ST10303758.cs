@@ -103,12 +103,15 @@ namespace POE_Part_2
             // Calculate total calories for the recipe
             recipe.TotalCalories = CalculateTotalCalories(recipe);
 
+            // Raise the event for calorie notification
+            CalorieExceeded?.Invoke(recipe.Name, recipe.TotalCalories);
+
             // Check if total calories exceed 300
             if (recipe.TotalCalories > 300)
             {
-                // Raise the event for calorie notification
-                CalorieExceeded?.Invoke(recipe.Name, recipe.TotalCalories);
+                Console.ForegroundColor = ConsoleColor.Red; // Set text color to red
                 Console.WriteLine("Warning: Total calories of the recipe exceed 300!");
+                Console.ResetColor(); // Reset text color to default
                 Console.WriteLine();
             }
 
@@ -116,8 +119,9 @@ namespace POE_Part_2
             recipes.Add(recipe);
         }
 
+
         // Method to calculate total calories for a recipe
-        private double CalculateTotalCalories(Recipe recipe)
+        public double CalculateTotalCalories(Recipe recipe)
         {
             double totalCalories = 0;
 
