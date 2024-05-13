@@ -159,6 +159,15 @@ namespace POE_Part_2
                     // Recalculate the total calories for the recipe
                     recipe.TotalCalories = CalculateTotalCalories(recipe);
                     Console.WriteLine("Recipe scaled successfully.");
+
+                    // Check if total calories exceed 300 after scaling
+                    if (recipe.TotalCalories > 300)
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red; // Set text color to red
+                        Console.WriteLine("Warning: Total calories of the recipe exceed 300 after scaling!");
+                        Console.ResetColor(); // Reset text color to default
+                        Console.WriteLine();
+                    }
                 }
                 else
                 {
@@ -248,7 +257,16 @@ namespace POE_Part_2
                 Console.WriteLine();
 
                 // Display total calories
-                Console.WriteLine($"Total Calories: {recipe.TotalCalories}");
+                if (recipe.TotalCalories > 300)
+                {
+                    Console.ForegroundColor = ConsoleColor.Red; // Set text color to red
+                    Console.WriteLine($"Total Calories: {recipe.TotalCalories} (Warning: Exceeds 300)");
+                    Console.ResetColor(); // Reset text color to default
+                }
+                else
+                {
+                    Console.WriteLine($"Total Calories: {recipe.TotalCalories}");
+                }
                 Console.WriteLine();
             }
             else
@@ -257,7 +275,6 @@ namespace POE_Part_2
                 Console.WriteLine();
             }
         }
-
         /// <summary>
         /// Clears all recipe data.
         /// </summary>
