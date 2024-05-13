@@ -30,18 +30,30 @@ while (!exit)
             // Call EnterRecipeDetails method to input recipe details
             recipeManager.EnterRecipeDetails();
             break;
+        
         case "2":
+            // Prompt user for the name of the recipe to display
+            Console.Write("Enter the name of the recipe to display: ");
+            string recipeName = Console.ReadLine();
             // Call DisplayRecipe method to display the recipe
-            recipeManager.DisplayRecipe();
+            recipeManager.DisplayRecipe(recipeName);
             break;
+
         case "3":
+            // Prompt user for the name of the recipe to scale
+            Console.Write("Enter the name of the recipe to scale: ");
+            string recipeToScale = Console.ReadLine();
             // Call ScaleRecipe method to scale the recipe
-            recipeManager.ScaleRecipe();
+            recipeManager.ScaleRecipe(recipeToScale);
             break;
         case "4":
+            // Prompt user for the name of the recipe to reset quantities
+            Console.Write("Enter the name of the recipe to reset quantities: ");
+            string recipeToReset = Console.ReadLine();
             // Call ResetQuantities method to reset quantities to original values
-            recipeManager.ResetQuantities();
+            recipeManager.ResetQuantities(recipeToReset);
             break;
+
         case "5":
             // Call ClearData method to clear all recipe data
             recipeManager.ClearData();

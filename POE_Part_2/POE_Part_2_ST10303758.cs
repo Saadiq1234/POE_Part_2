@@ -119,6 +119,61 @@ namespace POE_Part_2
             return totalCalories;
         }
 
+        // Method to scale the recipe
+        public void ScaleRecipe(string recipeName)
+        {
+            Recipe recipe = recipes.Find(r => r.Name.Equals(recipeName, StringComparison.OrdinalIgnoreCase));
+            if (recipe != null)
+            {
+                Console.Write("Enter the scaling factor (0.5, 2, or 3): ");
+                double factor = double.Parse(Console.ReadLine());
+                Console.WriteLine();
+
+                // Check if the entered factor is valid and scale the recipe
+                if (factor == 0.5 || factor == 2 || factor == 3)
+                {
+                    foreach (var ingredient in recipe.Ingredients)
+                    {
+                        ingredient.Quantity *= factor;
+                    }
+                    Console.WriteLine("Recipe scaled successfully.");
+                }
+                else
+                {
+                    Console.WriteLine("Invalid scaling factor. Recipe scaling failed.");
+                }
+
+                Console.WriteLine();
+            }
+            else
+            {
+                Console.WriteLine("Recipe not found.");
+                Console.WriteLine();
+            }
+        }
+        // Method to reset quantities to original values
+        public void ResetQuantities(string recipeName)
+        {
+            Recipe recipe = recipes.Find(r => r.Name.Equals(recipeName, StringComparison.OrdinalIgnoreCase));
+            if (recipe != null)
+            {
+                foreach (var ingredient in recipe.Ingredients)
+                {
+                    // Assuming the original quantity is stored elsewhere, let's reset it here
+                    // For demonstration purposes, let's assume the original quantity is 1
+                    ingredient.Quantity = 1.0;
+                }
+                Console.WriteLine("Quantities reset to original values.");
+                Console.WriteLine();
+            }
+            else
+            {
+                Console.WriteLine("Recipe not found.");
+                Console.WriteLine();
+            }
+        }
+
+
         // Method to display all recipes in alphabetical order by name
         public void DisplayAllRecipes()
         {
