@@ -7,7 +7,7 @@ namespace POE_Part_2
     public delegate void CalorieNotificationHandler(string recipeName, double totalCalories);
 
     /// <summary>
-    /// Manages recipes including adding, scaling, displaying, and clearing recipe data.
+    /// Class to manage recipes including adding, scaling, displaying, and clearing recipe data.
     /// </summary>
     public class RecipeManager
     {
@@ -44,7 +44,7 @@ namespace POE_Part_2
         }
 
         /// <summary>
-        /// Enters details for a new recipe including name, ingredients, steps, and calculates total calories.
+        /// Adds a new recipe with details provided by the user.
         /// </summary>
         public void EnterRecipeDetails()
         {
@@ -121,10 +121,10 @@ namespace POE_Part_2
             // Add the recipe to the list
             recipes.Add(recipe);
         }
+
         /// <summary>
-        /// Method to calculate total calories for a recipe after scaling.
+        /// Calculates total calories for a recipe.
         /// </summary>
-        // Calculate total calories for the recipe
         public double CalculateTotalCalories(Recipe recipe)
         {
             double totalCalories = 0;
@@ -138,9 +138,8 @@ namespace POE_Part_2
             return totalCalories;
         }
 
-
         /// <summary>
-        /// Scales a recipe by a given factor, updating quantities and calories accordingly.
+        /// Scales the quantities of ingredients in a recipe by a given factor.
         /// </summary>
         public void ScaleRecipe(string recipeName)
         {
@@ -197,9 +196,8 @@ namespace POE_Part_2
             }
         }
 
-
         /// <summary>
-        /// Resets ingredient quantities to their original values.
+        /// Resets the quantities of ingredients in a recipe to their original values.
         /// </summary>
         public void ResetQuantities(string recipeName)
         {
@@ -229,7 +227,6 @@ namespace POE_Part_2
             }
         }
 
-
         /// <summary>
         /// Displays all available recipes in alphabetical order by name.
         /// </summary>
@@ -252,7 +249,6 @@ namespace POE_Part_2
             }
             Console.WriteLine();
         }
-
 
         /// <summary>
         /// Displays details of a specific recipe including ingredients, steps, and total calories.
@@ -300,6 +296,7 @@ namespace POE_Part_2
                 Console.WriteLine();
             }
         }
+
         /// <summary>
         /// Clears all recipe data including ingredient quantities and calories.
         /// </summary>
@@ -313,6 +310,5 @@ namespace POE_Part_2
             Console.WriteLine("All data cleared including ingredient quantities and calories.");
             Console.WriteLine();
         }
-
     }
 }
