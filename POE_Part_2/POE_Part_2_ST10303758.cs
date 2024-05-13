@@ -228,7 +228,7 @@ namespace POE_Part_2
         }
 
         /// <summary>
-        /// Displays all available recipes in alphabetical order by name.
+        /// Displays all available recipes along with their ingredients, steps, and total calories.
         /// </summary>
         public void DisplayAllRecipes()
         {
@@ -245,10 +245,41 @@ namespace POE_Part_2
             Console.WriteLine("Available Recipes:");
             foreach (var recipe in recipes)
             {
-                Console.WriteLine(recipe.Name);
+                Console.WriteLine($"Recipe: {recipe.Name}");
+                Console.WriteLine();
+
+                // Display ingredients
+                Console.WriteLine("Ingredients:");
+                foreach (var ingredient in recipe.Ingredients)
+                {
+                    Console.WriteLine($"{ingredient.Name}: {ingredient.Quantity} {ingredient.Unit}");
+                }
+                Console.WriteLine();
+
+                // Display steps
+                Console.WriteLine("Steps:");
+                for (int i = 0; i < recipe.Steps.Count; i++)
+                {
+                    Console.WriteLine($"{i + 1}. {recipe.Steps[i]}");
+                }
+                Console.WriteLine();
+
+                // Display total calories
+                if (recipe.TotalCalories > 300)
+                {
+                    Console.ForegroundColor = ConsoleColor.Red; // Set text color to red
+                    Console.WriteLine($"Total Calories: {recipe.TotalCalories} (Warning: Exceeds 300)");
+                    Console.ResetColor(); // Reset text color to default
+                }
+                else
+                {
+                    Console.WriteLine($"Total Calories: {recipe.TotalCalories}");
+                }
+                Console.WriteLine("--------------------------------------------");
             }
             Console.WriteLine();
         }
+
 
         /// <summary>
         /// Displays details of a specific recipe including ingredients, steps, and total calories.
