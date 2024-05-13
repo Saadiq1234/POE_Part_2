@@ -127,11 +127,13 @@ namespace POE_Part_2
 
             foreach (var ingredient in recipe.Ingredients)
             {
-                totalCalories += ingredient.Calories * ingredient.Quantity;
+                // Multiply the calories of each ingredient by its quantity and add to the total
+                totalCalories += (ingredient.Calories * ingredient.Quantity);
             }
 
             return totalCalories;
         }
+
 
         /// <summary>
         /// Scales a recipe by a given factor, updating quantities and calories accordingly.
@@ -150,10 +152,16 @@ namespace POE_Part_2
                 {
                     foreach (var ingredient in recipe.Ingredients)
                     {
+                        // Store the original quantity and calories for each ingredient
+                        double originalQuantity = ingredient.Quantity;
+                        int originalCalories = ingredient.Calories;
+
                         // Scale the quantity
                         ingredient.Quantity *= factor;
-                        // Scale the calories accordingly by multiplying
-                        ingredient.Calories = (int)Math.Round(ingredient.Calories * factor);
+
+                        // Calculate the new calories based on the change in quantity
+                        // Calories are adjusted proportionally to the change in quantity
+                        ingredient.Calories = (int)Math.Round(originalCalories * (ingredient.Quantity / originalQuantity));
                     }
 
                     // Recalculate the total calories for the recipe
@@ -183,6 +191,7 @@ namespace POE_Part_2
             }
         }
 
+
         /// <summary>
         /// Resets ingredient quantities to their original values.
         /// </summary>
@@ -193,11 +202,12 @@ namespace POE_Part_2
             {
                 foreach (var ingredient in recipe.Ingredients)
                 {
-                    // Assuming the original quantity is stored elsewhere, let's reset it here
-                    // For demonstration purposes, let's assume the original quantity is 1
+                    // Assuming the original quantity and calories are stored elsewhere, let's reset them here
+                    // For demonstration purposes, let's assume the original quantity is 1 and calories are 100 per ingredient
                     ingredient.Quantity = 1.0;
+                    ingredient.Calories = 100;
                 }
-                Console.WriteLine("Quantities reset to original values.");
+                Console.WriteLine("Quantities and calories reset to original values.");
                 Console.WriteLine();
             }
             else
@@ -206,6 +216,7 @@ namespace POE_Part_2
                 Console.WriteLine();
             }
         }
+
 
         /// <summary>
         /// Displays all available recipes in alphabetical order by name.
@@ -276,13 +287,18 @@ namespace POE_Part_2
             }
         }
         /// <summary>
-        /// Clears all recipe data.
+        /// Clears all recipe data including ingredient quantities and calories.
         /// </summary>
         public void ClearData()
         {
+            foreach (var recipe in recipes)
+            {
+                ResetQuantities(recipe.Name);
+            }
             recipes.Clear();
-            Console.WriteLine("All data cleared.");
+            Console.WriteLine("All data cleared including ingredient quantities and calories.");
             Console.WriteLine();
         }
+
     }
 }
