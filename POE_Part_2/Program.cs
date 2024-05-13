@@ -32,12 +32,21 @@ while (!exit)
             break;
 
         case "2":
-            // Prompt user for the name of the recipe to display
-            Console.Write("Enter the name of the recipe to display: ");
-            string recipeName = Console.ReadLine();
-            // Call DisplayRecipe method to display the recipe
-            recipeManager.DisplayRecipe(recipeName);
+            // Prompt user for the name of the recipe to display, or display all recipes if no name is provided
+            Console.Write("Enter the name of the recipe to display (or leave blank to display all): ");
+            string recipeNameToDisplay = Console.ReadLine();
+            if (string.IsNullOrEmpty(recipeNameToDisplay))
+            {
+                // Call DisplayAllRecipes method to display all available recipes
+                recipeManager.DisplayAllRecipes();
+            }
+            else
+            {
+                // Call DisplayRecipe method to display the specified recipe
+                recipeManager.DisplayRecipe(recipeNameToDisplay);
+            }
             break;
+
 
         case "3":
             // Prompt user for the name of the recipe to scale
