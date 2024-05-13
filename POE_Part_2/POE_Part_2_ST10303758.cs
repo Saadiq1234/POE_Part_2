@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace POE_Part_2
 {
+    // Define a delegate for calorie notifications
+    public delegate void CalorieNotificationHandler(string recipeName, double totalCalories);
+
+    /// <summary>
+    /// Manages recipes including adding, scaling, displaying, and clearing recipe data.
+    /// </summary>
     internal class RecipeManager
     {
         // Define a class to hold recipe details
@@ -30,13 +33,18 @@ namespace POE_Part_2
         // Private field to store recipes
         private List<Recipe> recipes;
 
+        // Event for calorie notifications
+        public event CalorieNotificationHandler CalorieExceeded;
+
         // Constructor to initialize the list of recipes
         public RecipeManager()
         {
             recipes = new List<Recipe>();
         }
 
-        // Method to enter recipe details
+        /// <summary>
+        /// Enters details for a new recipe including name, ingredients, steps, and calculates total calories.
+        /// </summary>
         public void EnterRecipeDetails()
         {
             Recipe recipe = new Recipe();
@@ -98,6 +106,8 @@ namespace POE_Part_2
             // Check if total calories exceed 300
             if (recipe.TotalCalories > 300)
             {
+                // Raise the event for calorie notification
+                CalorieExceeded?.Invoke(recipe.Name, recipe.TotalCalories);
                 Console.WriteLine("Warning: Total calories of the recipe exceed 300!");
                 Console.WriteLine();
             }
@@ -119,7 +129,9 @@ namespace POE_Part_2
             return totalCalories;
         }
 
-        // Method to scale the recipe
+        /// <summary>
+        /// Scales a recipe by a given factor, updating quantities and calories accordingly.
+        /// </summary>
         public void ScaleRecipe(string recipeName)
         {
             Recipe recipe = recipes.Find(r => r.Name.Equals(recipeName, StringComparison.OrdinalIgnoreCase));
@@ -158,8 +170,9 @@ namespace POE_Part_2
             }
         }
 
-
-        // Method to reset quantities to original values
+        /// <summary>
+        /// Resets ingredient quantities to their original values.
+        /// </summary>
         public void ResetQuantities(string recipeName)
         {
             Recipe recipe = recipes.Find(r => r.Name.Equals(recipeName, StringComparison.OrdinalIgnoreCase));
@@ -181,8 +194,9 @@ namespace POE_Part_2
             }
         }
 
-
-        // Method to display all recipes in alphabetical order by name
+        /// <summary>
+        /// Displays all available recipes in alphabetical order by name.
+        /// </summary>
         public void DisplayAllRecipes()
         {
             if (recipes.Count == 0)
@@ -202,7 +216,9 @@ namespace POE_Part_2
             Console.WriteLine();
         }
 
-        // Method to display a specific recipe
+        /// <summary>
+        /// Displays details of a specific recipe including ingredients, steps, and total calories.
+        /// </summary>
         public void DisplayRecipe(string recipeName)
         {
             Recipe recipe = recipes.Find(r => r.Name.Equals(recipeName, StringComparison.OrdinalIgnoreCase));
@@ -238,7 +254,9 @@ namespace POE_Part_2
             }
         }
 
-        // Method to clear all recipe data
+        /// <summary>
+        /// Clears all recipe data.
+        /// </summary>
         public void ClearData()
         {
             recipes.Clear();
