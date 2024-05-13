@@ -134,8 +134,14 @@ namespace POE_Part_2
                 {
                     foreach (var ingredient in recipe.Ingredients)
                     {
+                        // Scale the quantity
                         ingredient.Quantity *= factor;
+                        // Scale the calories accordingly by multiplying
+                        ingredient.Calories = (int)Math.Round(ingredient.Calories * factor);
                     }
+
+                    // Recalculate the total calories for the recipe
+                    recipe.TotalCalories = CalculateTotalCalories(recipe);
                     Console.WriteLine("Recipe scaled successfully.");
                 }
                 else
@@ -151,6 +157,8 @@ namespace POE_Part_2
                 Console.WriteLine();
             }
         }
+
+
         // Method to reset quantities to original values
         public void ResetQuantities(string recipeName)
         {
