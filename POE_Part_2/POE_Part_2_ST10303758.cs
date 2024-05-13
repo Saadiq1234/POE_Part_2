@@ -280,6 +280,24 @@ namespace POE_Part_2
             Console.WriteLine();
         }
 
+        /// <summary>
+        /// Deletes a recipe based on its name.
+        /// </summary>
+        public void DeleteRecipe(string recipeName)
+        {
+            Recipe recipeToDelete = recipes.Find(r => r.Name.Equals(recipeName, StringComparison.OrdinalIgnoreCase));
+            if (recipeToDelete != null)
+            {
+                recipes.Remove(recipeToDelete);
+                Console.WriteLine($"Recipe '{recipeName}' deleted successfully.");
+            }
+            else
+            {
+                Console.WriteLine("Recipe not found.");
+            }
+            Console.WriteLine();
+        }
+
 
         /// <summary>
         /// Displays details of a specific recipe including ingredients, steps, and total calories.

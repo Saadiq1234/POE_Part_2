@@ -14,8 +14,9 @@ while (!exit)
     Console.WriteLine("2. Display recipe");
     Console.WriteLine("3. Scale Recipe");
     Console.WriteLine("4. Reset quantities");
-    Console.WriteLine("5. Clear all data");
-    Console.WriteLine("6. Exit");
+    Console.WriteLine("5. Delete recipe");
+    Console.WriteLine("6. Clear all data");
+    Console.WriteLine("7. Exit");
     Console.WriteLine();
 
     // Prompt user for choice
@@ -47,7 +48,6 @@ while (!exit)
             }
             break;
 
-
         case "3":
             // Prompt user for the name of the recipe to scale
             Console.Write("Enter the name of the recipe to scale: ");
@@ -65,11 +65,19 @@ while (!exit)
             break;
 
         case "5":
+            // Prompt user for the name of the recipe to delete
+            Console.Write("Enter the name of the recipe to delete: ");
+            string recipeNameToDelete = Console.ReadLine();
+            // Call DeleteRecipe method to delete the specified recipe
+            recipeManager.DeleteRecipe(recipeNameToDelete);
+            break;
+
+        case "6":
             // Call ClearData method to clear all recipe data
             recipeManager.ClearData();
             break;
 
-        case "6":
+        case "7":
             // Set exit flag to true to exit the loop
             exit = true;
             break;
